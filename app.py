@@ -118,7 +118,7 @@ def find_game_by_id(room_id):
 
 if __name__ == '__main__':
     app.debug = True
-    socketio.run(app)
+    socketio.run(app, port=33507)
 
 def emitGameUpdate(game):
     if game.player1 is not None:
