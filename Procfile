@@ -1,2 +1,2 @@
-web: gunicorn -w 4 app.py:app
+web: gunicorn --worker-class eventlet -w 1 app:app
 heroku ps:scale web=1
