@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8" />
+        <title>Play Guess Who Online</title>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+        <!-- <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.0.js"></script> -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            // Constants and globals
+            const room_id = '{{ room_id }}';
+            var socket;
+        </script>
+        <script type="text/javascript" src="/static/js/game.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                socket = io();
+                // On connect
+                socket.on('connect', function() {
+                    console.log('Client connected to socket');
+                    socket.emit('join', { 'game_id': room_id });
+                });
+                // On receiving game json
+                socket.on('game update', function(json) {
+                    console.log('Received game update');
+                    updateGame(json);
+                });
+                // On receiving a full game error
+                socket.on('full game error', function(data) {
+                    console.log('Game is full');
+                    socket.disconnect();
+                    displayFullGameError(data['destination_url']);
+                })
+                // Game settings form handler
+                $('#gameSettingsForm').on('submit', function(event) {
+                    event.preventDefault();
+                    console.log('game settings set');
+                    setGameSettings();   
+                    return false;
+                });  
+                // Restart game button handler
+                var restartButton = $('<button/>').text('Restart Game');
+                restartButton.attr('id', 'restartGameButton'); 
+                restartButton.on('click', function() {
+                    var choice = confirm('Are you sure you want to restart the game?');
+                    if (choice) {
+                        var data = { 'room_id': room_id };
+                        socket.emit('restart game', data);
+                    }
+                });  
+                $('#gameBoard').append(restartButton);
+                // Send a heartbeat every 3 seconds
+                setInterval(function() {
+                    console.log('heartbeat');
+                    socket.emit('heartbeat');
+                }, 3000);
+            });
+        </script>
+        <link href="/static/css/game.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="page content">
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator">
+                Loading Indicator
+            </div>
+            <!-- Settings Menu -->
+            <div id="settingsMenu" class="hidden">
+                <h1>Game Options</h1>
+                <form id="gameSettingsForm">
+                    <label for="facepacks">Selected Facepack:</label><br>
+                    <select name="facepacks" id="facepacks_dropdown">
+                        {% for facepack in facepacks %}
+                            <option value='{{ facepack }}'>{{ facepack }}</option>
+                        {% endfor %}
+                    </select><br>
+                    <label for="number_rows">Number of Rows:</label><br>
+                    <input type="number" name="number_rows" id="number_rows" value="4"><br>
+                    <label for="number_cols">Number of Columns:</label><br>
+                    <input type="number" name="number_cols" id="number_cols" value="6"><br>
+                    <input type="submit" value="Start Game"><br>
+                </form>
+            </div>
+            <!-- Game Board -->
+            <div id="gameBoard" class="hidden">
+                <div class="topHalf">
+                    <div class="target" id="theirTarget"></div>
+                    <div class="board" id="theirBoard"></div>
+                </div>
+                <div class="bottomHalf">
+                    <div class="target" id="myTarget"></div>
+                    <div class="board" id="myBoard"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

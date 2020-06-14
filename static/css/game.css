@@ -1,0 +1,116 @@
+
+:root {
+  --rowNum: 4;
+  --colNum: 5;
+  --gridHeight: 120px;
+  --gridWidth: 120px;
+}
+
+.hidden {
+    display: none;
+}
+
+#settingsMenu, #gameBoard, #loadingIndicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+/* Split the screen in half */
+
+.topHalf, .bottomHalf {
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 10px;
+}
+
+.topHalf {
+    top: 0;
+    bottom: 55%;
+}
+
+.bottomHalf {
+    top: 45%;
+    bottom: 0;
+}
+
+.target {
+    float: left;
+    height: 100%;
+}
+
+#myTarget {
+    width: 30%;
+}
+
+#theirTarget {
+    width: 30%;
+}
+
+.targetCard {
+    margin: 10%;
+    border: 5px solid yellow;
+    border-radius: 10%;
+    overflow: hidden;
+}
+
+.board {
+    float: left;
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: repeat(var(--rowNum), auto);
+    grid-template-columns: repeat(var(--colNum), auto);
+}
+
+#myBoard {
+    width: 70%;
+}
+
+#theirBoard {
+    width: 70%;
+}
+
+.gridItem {
+    grid-column-start: auto;
+    grid-row-start: auto;
+    margin: 3px;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 10%;
+    border: 2px solid yellow;
+}
+
+.faceImage{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.card {
+    position: relative;
+    text-align: center;
+}
+
+.cardLabel {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100%;
+    color: white;
+    background-color: black;
+    opacity: 70%;
+}
+
+#restartGameButton {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
+
+.flipped {
+    opacity: 50%;
+    filter: grayscale(1);
+}

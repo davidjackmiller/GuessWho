@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+      <meta charset="utf-8" />
+      <title>Hello world!</title>
+      <link type="text/css" rel="stylesheet"
+            href="{{ url_for('static',
+                  filename='hello.css')}}" />
+    </head>
+    <body>
+        <div>
+            <form method="post">
+
+                <label for="nickname">Nickname:</label><br>
+                {% if "nickname" in error_fields %}
+                    <p>Please enter a value for nickname</p>
+                {% endif %}
+                <input type="text" name="nickname">
+
+                <input type="submit" name="submit" value="Join Room">
+            </form>
+        </div>
+
+    </body>
+</html>
