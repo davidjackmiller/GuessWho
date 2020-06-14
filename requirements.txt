@@ -2,3 +2,4 @@ Flask==1.1.2
 Flask-SocketIO==4.3.0
 eventlet==0.25.2
 APScheduler==3.6.3
+gunicorn==20.0.4
