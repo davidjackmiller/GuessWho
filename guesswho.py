@@ -176,7 +176,3 @@ class Player:
     def __init__(self, nickname, session_id):
         self.nickname = nickname
         self.session_id = session_id
-
-
-
-
