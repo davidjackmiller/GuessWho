@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang='en'>
     <head>
-      <meta charset="utf-8" />
-      <title>Hello world!</title>
-      <link type="text/css" rel="stylesheet"
-            href="{{ url_for('static',
-                  filename='hello.css')}}" />
+        <meta charset="utf-8" />
+        <title>Guess Who Online</title>
+        <link href="/static/css/index.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script type="text/javascript">
+            $(document).keypress(function(event) {
+                if (event.which == '13') {
+                    event.preventDefault();
+                }
+            });
+        </script>
     </head>
     <body>
-        <div>
-            <form method="post">
-                <label for="nickname">Nickname:</label><br>
-                {% if "nickname" in error_fields %}
-                    <p>Please enter a value for nickname</p>
-                {% endif %}
-                <input type="text" name="nickname" value="{{ prefills['nickname'] if prefills is defined else '' }}">
+        <div id="mainDiv">
+            <form method="post" autocomplete="off">
 
-                <label for="room">Room name:</label><br>
-                {% if "room" in error_fields %}
-                    <p>Please enter a value for room</p>
-                {% endif %}
-                <input type="text" name="room" value="{{ prefills['room'] if prefills is defined else '' }}"><br>
+                <h1> Guess Who? </h1>
 
-                <label for="password">Password:</label><br>
-                {% if "password" in error_fields %}
-                    <p>Please enter a value for password</p>
-                {% endif %}
-                <input type="text" name="password" value="{{ prefills['password'] if prefills is defined else '' }}">
+                <div class="row">
+                    <label for="nickname">Nickname:</label>
+                    <input type="text" class={{"error" if "nickname" in error_fields else ""}} name="nickname" value="{{ prefills['nickname'] if prefills is defined else '' }}">
+                </div>
+                
+                <div class="row">
+                    <label for="room">Room name:</label>
+                    <input type="text" class={{"error" if "room" in error_fields else ""}} name="room" value="{{ prefills['room'] if prefills is defined else '' }}">
+                </div>
 
-                <input type="submit" name="submit" value="Create Room">
-                <input type="submit" name="submit" value="Join Room">
+                <div class="row">
+                    <label for="password">Password:</label>
+                    <input type="text" class={{"error" if "password" in error_fields else ""}} name="password" value="{{ prefills['password'] if prefills is defined else '' }}">
+                </div>
+
+                <input id="createRoom" class="submitButton" type="submit" name="submit" value="Create Room">
+                <input id="joinRoom" class="submitButton" type="submit" name="submit" value="Join Room">
             </form>
         </div>
 

@@ -59,26 +59,34 @@
         <link href="/static/css/game.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div id="page content">
+        <div id="pageContent">
             <!-- Loading Indicator -->
-            <div id="loadingIndicator">
-                Loading Indicator
-            </div>
+            <div id="loadingIndicator"></div>
             <!-- Settings Menu -->
             <div id="settingsMenu" class="hidden">
                 <h1>Game Options</h1>
-                <form id="gameSettingsForm">
-                    <label for="facepacks">Selected Facepack:</label><br>
-                    <select name="facepacks" id="facepacks_dropdown">
-                        {% for facepack in facepacks %}
-                            <option value='{{ facepack }}'>{{ facepack }}</option>
-                        {% endfor %}
-                    </select><br>
-                    <label for="number_rows">Number of Rows:</label><br>
-                    <input type="number" name="number_rows" id="number_rows" value="4"><br>
-                    <label for="number_cols">Number of Columns:</label><br>
-                    <input type="number" name="number_cols" id="number_cols" value="6"><br>
-                    <input type="submit" value="Start Game"><br>
+                <form id="gameSettingsForm" autocomplete="off">
+
+                    <div class="row">
+                        <label for="facepacks">Selected Facepack:</label>
+                        <select name="facepacks" id="facepacks_dropdown">
+                            {% for facepack in facepacks %}
+                                <option value='{{ facepack }}'>{{ facepack }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <label for="number_rows">Number of Rows:</label>
+                        <input type="number" name="number_rows" id="number_rows" value="4">
+                    </div>
+
+                    <div class="row">
+                        <label for="number_cols">Number of Columns:</label>
+                        <input type="number" name="number_cols" id="number_cols" value="6">
+                    </div>
+
+                    <input type="submit" value="Start Game">
                 </form>
             </div>
             <!-- Game Board -->

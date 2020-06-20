@@ -32,11 +32,11 @@ def index(error = None):
         submit_action = request.form.get('submit')
         # Raise an error if any of the fields are empty
         error_fields = []
-        if len(nickname) == 0:
+        if nickname is None or len(nickname) == 0:
             error_fields.append('nickname')
-        if len(password) == 0:
+        if password is None or len(password) == 0:
             error_fields.append('password')
-        if len(room) == 0:
+        if room is None or len(room) == 0:
             error_fields.append('room')
         if len(error_fields) > 0:
             return render_template('index.html', prefills=request.form, error_fields=error_fields)
@@ -83,7 +83,7 @@ def room(room_id):
         return render_template('nickname.html', error_fields=error_fields)
     # Show the game room
     else:
-        facepacks = os.listdir('./static/facepacks')
+        facepacks = list(filter(lambda x:not x.endswith('.DS_Store'), os.listdir('./static/facepacks')))
         return render_template('game.html', room_id=room_id, facepacks=facepacks)
 
 """ ROUTING UTILS """

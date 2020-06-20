@@ -16,7 +16,7 @@ function updateGame(json) {
     if (Object.keys(json).length === 0) {
         console.log("Showing Settings Menu")
         $("#loadingIndicator").addClass('hidden');
-        $("#settingsMenu").removeClass('hidden')
+        $("#settingsMenu").removeClass('hidden');
         $("#gameBoard").addClass('hidden');
     } else {
         console.log("Showing Game Board")

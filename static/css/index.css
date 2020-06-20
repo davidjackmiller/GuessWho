@@ -1,0 +1,63 @@
+
+body {
+    background-color: dimgray;
+}
+
+#mainDiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3%;
+    background-color: cornflowerblue;
+}
+
+h1 {
+    color: red;
+    -webkit-text-stroke: 1px white;
+    font-size: 40px;
+    text-align: center;
+}
+
+label {
+    float: left;
+    color: white;
+}
+
+input[type="text"] {
+    float:right;
+    margin-left: 30px;
+    background-color: white;
+}
+
+.row {
+    margin: 10px 50px;
+    display: flow-root;
+}
+
+.row:nth-child(4) {
+    margin-bottom: 30px;
+}
+
+.error {
+    border: 2px solid red;
+}
+
+#createRoom {
+    float: left;
+}
+
+#joinRoom {
+    float: right;
+}
+
+input[type="submit"] {
+    height: 35px;
+    width: 48%;
+    margin: 1%;
+    border: none;
+    background-color: yellow;
+    border-radius: 5px;
+    color: black;
+    font-size: 15px;
+}

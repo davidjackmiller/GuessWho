@@ -10,7 +10,11 @@
     display: none;
 }
 
-#settingsMenu, #gameBoard, #loadingIndicator {
+#pageContent {
+    background-color: dimgray;
+}
+
+#gameBoard, #loadingIndicator {
     position: absolute;
     top: 0;
     right: 0;
@@ -114,3 +118,72 @@
     opacity: 50%;
     filter: grayscale(1);
 }
+
+/* Loading Indicator */
+
+#loadingIndicator {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Settings Menu */
+
+body {
+    background-color: dimgray;
+}
+
+#settingsMenu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3%;
+    background-color: cornflowerblue;
+}
+
+h1 {
+    color: red;
+    -webkit-text-stroke: 1px white;
+    font-size: 40px;
+    text-align: center;
+}
+
+label {
+    float: left;
+    color: white;
+}
+
+select, input[type="number"] {
+    float:right;
+    margin-left: 30px;
+    background-color: white;
+}
+
+.row {
+    margin: 10px 50px;
+    display: flow-root;
+}
+
+input[type="submit"] {
+    height: 50px;
+    width: 96%;
+    margin: 2%;
+    border: none;
+    background-color: yellow;
+    color: black;
+    font-size: 20px;
+}
+

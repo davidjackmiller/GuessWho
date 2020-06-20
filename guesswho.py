@@ -15,7 +15,7 @@ class Game:
 
     # Creates a hash for the room
     def generate_room_id(self):
-        string_length = 10
+        string_length = 20
         character_set = string.ascii_lowercase + string.ascii_uppercase + string.digits
         return ''.join(random.choice(character_set) for _ in range(string_length))
 
@@ -89,14 +89,23 @@ class Game:
             raise Exception("to_json takes arguments 1 or 2 only")
         other_player = player % 2 + 1
         myBoard = {
+            'nickname': self.nickname_for_player(player),
             'target': self.target1 if player == 1 else self.target2,
             'cards': self.board.to_json(player, True),
         }
         theirBoard = {
+            'nickname': self.nickname_for_player(other_player),
             'has_target': bool(self.target2 if player == 1 else self.target1),
             'cards': self.board.to_json(other_player, False)
         }
         return { 'myBoard': myBoard, 'theirBoard': theirBoard }
+
+    # Get the nickname of the player
+    def nickname_for_player(self, player):
+        if (player == 1):
+            return self.player1.nickname if self.player1 is not None else None
+        else:
+            return self.player2.nickname if self.player2 is not None else None
 
     # Setup the game board
     def set_up_game_board(self, facepack, num_rows, num_cols):
@@ -125,7 +134,6 @@ class Board:
         total_faces = num_rows * num_cols
         if (len(all_faces) < total_faces):
             raise Exception("Not enough faces in facepack")
-        print(all_faces)
         self.faces = random.sample(all_faces, total_faces)
         self.faces = list(map(lambda face:'/static/facepacks/' + facepack_name + '/' + face, self.faces))
         # Create boards for both players
